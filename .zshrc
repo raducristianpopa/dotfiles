@@ -1,0 +1,2 @@
+source ~/.zprofile
+fish
