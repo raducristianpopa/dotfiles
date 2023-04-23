@@ -3,7 +3,7 @@ if (not status) then return end
 
 lualine.setup {
     options = {
-        theme = "rose-pine",
+        theme = "nordic",
         icons_enabled = false,
         disabled_filetypes = {},
         section_separators = {},

@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 vim.g.mapleader = " "
 
+map("n", "<leader>w", "<Cmd>write<CR>", { desc = "[W]rite current file" })
 map("n", "<leader>pv", vim.cmd.Ex, { desc = "Go bat to NetRW" })
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace highlighted" })
 map("n", "<C-a>", "gg<S-v>G", { desc = "Select all" })

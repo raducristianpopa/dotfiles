@@ -1,4 +1,5 @@
 pcall(require('telescope').load_extension, 'fzf')
+
 local status, telescope_builtin = pcall(require, 'telescope.builtin')
 if (not status) then return end;
 

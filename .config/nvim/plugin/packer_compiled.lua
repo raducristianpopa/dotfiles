@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "/Users/radu/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  nordic = {
+    loaded = true,
+    path = "/Users/radu/.local/share/nvim/site/pack/packer/start/nordic",
+    url = "https://github.com/AlexvZyl/nordic.nvim"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/Users/radu/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -148,11 +153,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/radu/.local/share/nvim/site/pack/packer/start/prettier.nvim",
     url = "https://github.com/MunifTanjim/prettier.nvim"
-  },
-  ["rose-pine"] = {
-    loaded = true,
-    path = "/Users/radu/.local/share/nvim/site/pack/packer/start/rose-pine",
-    url = "https://github.com/rose-pine/neovim"
   },
   ["telescope.nvim"] = {
     loaded = true,
