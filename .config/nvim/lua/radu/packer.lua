@@ -26,6 +26,7 @@ local plugins = {
             {"L3MON4D3/LuaSnip"},
         },
     },
+    "christoomey/vim-tmux-navigator",
     "tpope/vim-fugitive",
     "nvim-lualine/lualine.nvim",
     "windwp/nvim-ts-autotag",
@@ -36,6 +37,7 @@ local plugins = {
         "AlexvZyl/nordic.nvim",
         as = "nordic",
     },
+    "rebelot/kanagawa.nvim"
 };
 
 -- Plugin Setup
