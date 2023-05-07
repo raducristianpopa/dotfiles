@@ -33,11 +33,10 @@ local plugins = {
     "MunifTanjim/prettier.nvim",
     "jose-elias-alvarez/null-ls.nvim",
     "lewis6991/gitsigns.nvim",
-    {
-        "AlexvZyl/nordic.nvim",
-        as = "nordic",
-    },
-    "rebelot/kanagawa.nvim"
+    "nvim-tree/nvim-web-devicons",
+    -- Themes
+    "rebelot/kanagawa.nvim",
+    "ellisonleao/gruvbox.nvim",
 };
 
 -- Plugin Setup

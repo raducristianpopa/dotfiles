@@ -3,6 +3,7 @@ vim.g.mapleader = " "
 
 opt.guicursor = ""
 opt.nu = true
+opt.nuw = 1
 opt.relativenumber = true
 opt.tabstop = 4
 opt.softtabstop = 4

@@ -3,7 +3,7 @@ if (not status) then return end
 
 lualine.setup {
     options = {
-        theme = "kanagawa",
+        theme = "gruvbox",
         icons_enabled = false,
         disabled_filetypes = {},
         section_separators = {},
