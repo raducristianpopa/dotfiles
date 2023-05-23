@@ -8,6 +8,7 @@ local plugins = {
         "nvim-treesitter/nvim-treesitter",
         { run = ":TSupdate" },
     },
+    "nvim-treesitter/playground",
     {
         "VonHeikemen/lsp-zero.nvim",
         branch = "v2.x",
@@ -34,9 +35,12 @@ local plugins = {
     "jose-elias-alvarez/null-ls.nvim",
     "lewis6991/gitsigns.nvim",
     "nvim-tree/nvim-web-devicons",
+    "ThePrimeagen/vim-be-good",
     -- Themes
-    "rebelot/kanagawa.nvim",
-    "ellisonleao/gruvbox.nvim",
+    {
+        "rose-pine/neovim",
+        as = "rose-pine"
+    }
 };
 
 -- Plugin Setup

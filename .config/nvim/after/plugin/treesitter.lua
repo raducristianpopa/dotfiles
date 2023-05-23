@@ -10,6 +10,7 @@ ts.setup {
         "yaml",
         "json",
         "html",
+        "svelte",
         "javascript",
         "typescript",
         "tsx",

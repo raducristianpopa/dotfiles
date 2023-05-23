@@ -11,6 +11,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 lsp.ensure_installed({
 	"tsserver",
+    "svelte",
 	"eslint",
 	"rust_analyzer",
 })

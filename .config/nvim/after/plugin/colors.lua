@@ -1,27 +1,21 @@
-local status, gruvbox = pcall(require, "gruvbox")
+local status, rosepine = pcall(require, "rose-pine")
 if (not status) then return end
 
-gruvbox.setup({
-    undercurl = true,
-    underline = true,
-    bold = false,
-    italic = {
-        strings = false,
-        comments = false,
-        operators = false,
-        folds = true,
-    },
-    strikethrough = true,
-    invert_selection = false,
-    invert_signs = false,
-    invert_tabline = false,
-    invert_intend_guides = false,
-    inverse = true, -- invert background for search, diffs, statuslines and errors
-    contrast = "hard", -- can be "hard", "soft" or empty string
-    palette_overrides = {},
-    overrides = {},
-    dim_inactive = false,
-    transparent_mode = false,
+rosepine.setup({
+	--- @usage 'auto'|'main'|'moon'|'dawn'
+    variant = "main",
+	bold_vert_split = false,
+	dim_nc_background = false,
+	disable_background = false,
+	disable_float_background = false,
+	disable_italics = false,
+
+	-- Change specific vim highlight groups
+	-- https://github.com/rose-pine/neovim/wiki/Recipes
+	highlight_groups = {
+		ColorColumn = { bg = 'subtle' },
+	}
 })
 
-vim.cmd("colorscheme gruvbox")
+-- Set colorscheme after options
+vim.cmd("colorscheme rose-pine")

@@ -1,36 +1,3 @@
-window:
-    startup_mode: Maximized
-    padding:
-        x: 0
-        y: 0
-    margin:
-        x: 0
-        y: 0
-    opacity: 1
-    decorations: buttonless
-
-scrolling:
-    history: 100000
-    multiplier: 3
-
-font:
-    normal:
-        family: 'MonoLisa Nerd Font'
-        style: Regular
-    italic:
-        family: 'MonoLisa Nerd Font'
-        style: Italic
-    bold:
-        family: 'MonoLisa Nerd Font'
-        style: Bold
-    size: 17.0
-
-cursor:
-    style:
-        shape: Block
-        blinking: Always
-    blink_interval: 500
-
 colors:
     primary:
         background: '0x191724'
