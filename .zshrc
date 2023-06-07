@@ -1,5 +1,6 @@
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/zsh-autosuggestions.zsh
+soruce ~/.config/zsh/utils.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"

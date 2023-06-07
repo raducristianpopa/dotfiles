@@ -1,21 +1,13 @@
-local status, rosepine = pcall(require, "rose-pine")
+local status, nightfox = pcall(require, "nightfox")
 if (not status) then return end
 
-rosepine.setup({
-	--- @usage 'auto'|'main'|'moon'|'dawn'
-    variant = "main",
-	bold_vert_split = false,
-	dim_nc_background = false,
-	disable_background = false,
-	disable_float_background = false,
-	disable_italics = false,
-
-	-- Change specific vim highlight groups
-	-- https://github.com/rose-pine/neovim/wiki/Recipes
-	highlight_groups = {
-		ColorColumn = { bg = 'subtle' },
-	}
+-- Default options
+nightfox.setup({
+    groups = {
+        all = {
+            EndOfBuffer = { link = "Conceal" },
+        }
+    }
 })
 
--- Set colorscheme after options
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme duskfox")

@@ -37,10 +37,7 @@ local plugins = {
     "nvim-tree/nvim-web-devicons",
     "ThePrimeagen/vim-be-good",
     -- Themes
-    {
-        "rose-pine/neovim",
-        as = "rose-pine"
-    }
+    "EdenEast/nightfox.nvim"
 };
 
 -- Plugin Setup
