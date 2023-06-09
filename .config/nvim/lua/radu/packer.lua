@@ -36,8 +36,11 @@ local plugins = {
     "lewis6991/gitsigns.nvim",
     "nvim-tree/nvim-web-devicons",
     "ThePrimeagen/vim-be-good",
+    "nvim-tree/nvim-tree.lua",
+    "kyazdani42/blue-moon",
     -- Themes
-    "EdenEast/nightfox.nvim"
+    "EdenEast/nightfox.nvim",
+    "aktersnurra/no-clown-fiesta.nvim"
 };
 
 -- Plugin Setup

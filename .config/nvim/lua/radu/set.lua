@@ -1,5 +1,7 @@
 local opt = vim.opt
 vim.g.mapleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 opt.guicursor = ""
 opt.nu = true

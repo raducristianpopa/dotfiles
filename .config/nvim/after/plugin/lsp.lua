@@ -1,5 +1,13 @@
-local lsp = require('lsp-zero').preset({})
-local cmp = require('cmp')
+local status, lspzero = pcall(require, "lsp-zero")
+if (not status) then return end
+
+local _status, cmp = pcall(require, "cmp")
+if (not _status) then return end
+
+local __status, lspconfig = pcall(require, "lspconfig")
+if (not __status) then return end
+
+local lsp = lspzero.preset({})
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -16,7 +24,7 @@ lsp.ensure_installed({
 	"rust_analyzer",
 })
 
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings
@@ -31,7 +39,7 @@ lsp.on_attach(function(_, bufnr)
         vim.keymap.set("n", keys, func, { buffer = bufnr, remap = false, desc = desc })
     end
 
-	map("gd", function() vim.lsp.buf.definition() end, "[G]oto [D]efinition")
+    map("gd", function() vim.lsp.buf.definition() end, "[G]oto [D]efinition")
     map("gi", function() vim.lsp.buf.implementation() end, "[G]oto [I]mplementation")
 	map("K", function() vim.lsp.buf.hover() end, "Hover documentation")
     map("<C-k>", function() vim.lsp.buf.signature_help() end, "Signature documentation")

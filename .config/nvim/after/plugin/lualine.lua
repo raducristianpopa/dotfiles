@@ -3,7 +3,7 @@ if (not status) then return end
 
 lualine.setup {
     options = {
-        theme = "duskfox",
+        theme = "no-clown-fiesta",
         icons_enabled = false,
         disabled_filetypes = {},
         section_separators = {},
