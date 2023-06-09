@@ -37,9 +37,7 @@ local plugins = {
     "nvim-tree/nvim-web-devicons",
     "ThePrimeagen/vim-be-good",
     "nvim-tree/nvim-tree.lua",
-    "kyazdani42/blue-moon",
     -- Themes
-    "EdenEast/nightfox.nvim",
     "aktersnurra/no-clown-fiesta.nvim"
 };
 
