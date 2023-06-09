@@ -18,15 +18,15 @@ scrolling:
 
 font:
     normal:
-        family: 'JetBrainsMonoNL Nerd Font Mono'
+        family: 'Agave Nerd Font Mono'
         style: Regular
     italic:
-        family: 'JetBrainsMonoNL Nerd Font Mono'
+        family: 'Agave Nerd Font Mono'
         style: Italic
     bold:
-        family: 'JetBrainsMonoNL Nerd Font Mono'
+        family: 'Agave Nerd Font Mono'
         style: Bold
-    size: 17.0
+    size: 20.5
 
 cursor:
     style:
