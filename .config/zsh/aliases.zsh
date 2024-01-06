@@ -8,6 +8,7 @@ alias v="nvim"
 
 alias ls="exa"
 alias ll="exa -lah"
+alias cat="bat"
 
 alias s="source ~/.zshrc"
 
