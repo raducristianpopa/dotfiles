@@ -1,10 +1,10 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
     config = function()
         local ts = require("nvim-treesitter.configs")
         ts.setup({
             ensure_installed = {
+                "bash",
                 "c",
                 "markdown",
                 "markdown_inline",

@@ -9,7 +9,6 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "nvimtools/none-ls.nvim",
             "folke/neodev.nvim",
-            "j-hui/fidget.nvim",
         },
         config = function()
             local null_ls = require("null-ls")
@@ -22,6 +21,11 @@ return {
                 },
             })
             require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "lua_ls",
+                    "tsserver",
+                    "eslint",
+                },
                 automatic_installation = { exclude = { "ocamllsp", "gleam" } },
             })
 
@@ -31,6 +35,7 @@ return {
                 graphql = {},
                 html = {},
                 jsonls = {},
+                intelephense = {},
                 lua_ls = {
                     settings = {
                         Lua = {
@@ -93,18 +98,16 @@ return {
                 sources = {
                     -- formatting
                     formatting.prettier,
-                    formatting.stylua,
-                    formatting.ocamlformat,
 
                     -- diagnostics
-                    diagnostics.eslint_d.with({
+                    diagnostics.eslint.with({
                         condition = function(utils)
                             return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
                         end,
                     }),
 
                     -- code actions
-                    code_actions.eslint_d.with({
+                    code_actions.eslint.with({
                         condition = function(utils)
                             return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" })
                         end,
