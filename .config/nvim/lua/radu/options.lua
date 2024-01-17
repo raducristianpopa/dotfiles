@@ -26,3 +26,5 @@ opt.signcolumn = "yes"
 opt.updatetime = 50
 opt.colorcolumn = "80"
 opt.swapfile = false
+opt.list = true
+opt.listchars = "eol:↵"

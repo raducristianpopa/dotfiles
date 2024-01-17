@@ -1,3 +1,21 @@
+local nnoremap = require("radu.utils").nnoremap
+local inoremap = require("radu.utils").inoremap
+
+local map_lsp_keybinds = function(buffer_number)
+    local telescope_builtin = require("telescope.builtin");
+    nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame", buffer = buffer_number })
+    nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: [C]ode [A]ction", buffer = buffer_number })
+    nnoremap("gd", vim.lsp.buf.definition, { desc = "LSP: [G]oto [D]efinition", buffer = buffer_number })
+    nnoremap("gr", telescope_builtin.lsp_references, { desc = "LSP: [G]oto [R]eferences", buffer = buffer_number })
+    nnoremap("gi", telescope_builtin.lsp_implementations, { desc = "LSP: [G]oto [I]mplementation", buffer = buffer_number })
+    nnoremap("<leader>bs", telescope_builtin.lsp_document_symbols, { desc = "LSP: [B]uffer [S]ymbols", buffer = buffer_number })
+    nnoremap("<leader>ps", telescope_builtin.lsp_workspace_symbols, { desc = "LSP: [P]roject [S]ymbols", buffer = buffer_number })
+    nnoremap("K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
+    inoremap("<C-h>", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
+    nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
+    nnoremap("td", vim.lsp.buf.type_definition, { desc = "LSP: [T]ype [D]efinition", buffer = buffer_number })
+end
+
 return {
     {
         "neovim/nvim-lspconfig",
@@ -12,7 +30,6 @@ return {
         },
         config = function()
             local null_ls = require("null-ls")
-            local map_lsp_keybinds = require("radu.keymaps").map_lsp_keybinds -- Has to load keymaps before pluginslsp
 
             require("neodev").setup()
             require("mason").setup({

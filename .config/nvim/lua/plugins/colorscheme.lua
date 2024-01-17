@@ -1,16 +1,17 @@
 return {
     "folke/tokyonight.nvim",
     config = function()
+        print("loading tokyo");
         require("tokyonight").setup({
             style = "night",
             light_style = "night",
-            transparent = false,
+            transparent = true,
             terminal_colors = true,
             styles = {
-                comments = {},
-                keywords = {},
-                functions = {},
-                variables = {},
+                comments = { italic = false },
+                keywords = { italic = false },
+                functions = { italic = false },
+                variables = { italic = false },
                 sidebars = "dark",
                 floats = "dark",
             },
@@ -31,6 +32,6 @@ return {
             end,
         })
 
-        vim.cmd.colorscheme("tokyonight-night")
+        vim.cmd.colorscheme("tokyonight-night");
     end,
 }
