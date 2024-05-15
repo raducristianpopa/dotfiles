@@ -41,8 +41,8 @@ return {
         nnoremap("<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" })
         nnoremap("<leader>sb", builtin.buffers, { desc = "[S]earch Open [B]uffers" })
         nnoremap("<leader>sf", builtin.find_files, { desc = "[S]earch [f]iles" })
-        nnoremap("<leader>sg", builtin.git_files, { desc = "[S]earch [g]it files" })
-        nnoremap("<leader>sr", builtin.live_grep, { desc = "[S]earch by [r]ipgrep" })
+        nnoremap("<leader>sg", builtin.git_files, { desc = "[S]earch [G]it files" })
+        nnoremap("<leader>sr", builtin.live_grep, { desc = "[S]earch by [R]ipgrep" })
         nnoremap("<leader>sw", function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
             { desc = "[S]earch current [w]ord" })
         nnoremap("<leader>/", function()

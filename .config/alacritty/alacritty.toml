@@ -1,5 +1,5 @@
 import = [
-"~/.config/alacritty/themes/tokyonight-night.toml",
+"~/.config/alacritty/themes/catpuccin-macchiato.toml",
 ]
 
 [env]
@@ -16,7 +16,7 @@ history = 100000
 multiplier = 3
 
 [font]
-size = 18
+size = 17
 normal = { family = "DankMono Nerd Font Mono", style = "Regular" }
 italic = { style = "Italic" }
 bold = { style = "Bold" }

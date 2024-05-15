@@ -1,37 +1,33 @@
 return {
-    "folke/tokyonight.nvim",
+    "catppuccin/nvim",
     config = function()
-        print("loading tokyo");
-        require("tokyonight").setup({
-            style = "night",
-            light_style = "night",
-            transparent = true,
-            terminal_colors = true,
-            styles = {
-                comments = { italic = false },
-                keywords = { italic = false },
-                functions = { italic = false },
-                variables = { italic = false },
-                sidebars = "dark",
-                floats = "dark",
+        require("catppuccin").setup({
+            integrations = {
+                cmp = true,
+                fidget = true,
+                gitsigns = true,
+                harpoon = true,
+                indent_blankline = {
+                    enabled = false,
+                    scope_color = "sapphire",
+                    colored_indent_levels = false,
+                },
+                mason = true,
+                native_lsp = { enabled = true },
+                noice = true,
+                notify = true,
+                symbols_outline = true,
+                telescope = true,
+                treesitter = true,
+                treesitter_context = true,
             },
-            sidebars = { "qf", "help" },
-            hide_inactive_statusline = false,
-            dim_inactive = false,
-            lualine_bold = false,
-
-            ---@param colors ColorScheme
-            on_colors = function(colors) end,
-
-            ---@param highlights Highlights
-            ---@param colors ColorScheme
-            on_highlights = function(highlights, colors)
-                highlights.EndOfBuffer = {
-                    fg = colors.comment
-                }
-            end,
         })
 
-        vim.cmd.colorscheme("tokyonight-night");
+        vim.cmd.colorscheme("catppuccin-macchiato")
+
+        -- Hide all semantic highlights until upstream issues are resolved (https://github.com/catppuccin/nvim/issues/480)
+        for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+            vim.api.nvim_set_hl(0, group, {})
+        end
     end,
 }

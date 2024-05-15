@@ -1,31 +1,44 @@
 return {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-        local status, lualine = pcall(require, "lualine")
-        if (not status) then return end
+    {
+        "nvim-lualine/lualine.nvim",
+        config = function()
+            local function truncate_branch_name(branch)
+                if not branch or branch == "" then
+                    return ""
+                end
 
-        lualine.setup {
-            options = {
-                theme = "tokyonight",
-                icons_enabled = true,
-                disabled_filetypes = {},
-                section_separators = {},
-            },
-            sections = {
-                lualine_a = { "mode" },
-                lualine_b = { "branch" },
-                lualine_c = {
-                    {
-                        "filename",
-                        file_status = true,
-                        path = 1, -- Just file name
-                    }
+                -- Match the branch name to the specified format
+                local user, team, ticket_number = string.match(branch, "^(%w+)/(%w+)%-(%d+)")
+
+                -- If the branch name matches the format, display {user}/{team}-{ticket_number}, otherwise display the full branch name
+                if ticket_number then
+                    return user .. "/" .. team .. "-" .. ticket_number
+                else
+                    return branch
+                end
+            end
+
+            require("lualine").setup({
+                options = {
+                    theme = "catppuccin",
+                    globalstatus = true,
+                    component_separators = { left = "", right = "" },
+                    section_separators = { left = "█", right = "█" },
                 },
-                lualine_x = {
-                    { "diagnostics", source = { "nvim_diagnostics" } },
-                    "filetype"
-                }
-            },
-        }
-    end
+                sections = {
+                    lualine_b = {
+                        { "branch", icon = "", fmt = truncate_branch_name },
+                        "diff",
+                        "diagnostics",
+                    },
+                    lualine_c = {
+                        { "filename", path = 1 },
+                    },
+                    lualine_x = {
+                        "filetype",
+                    },
+                },
+            })
+        end,
+    },
 }
