@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -g status-justify left
+set -g status-style bg=default
+set -g status-style fg=default
+set -g status-interval 2
+set -g automatic-rename on
+setw -g window-status-format "#[bg=colour0]#[fg=colour8]#I#[fg=colour8] #{b:pane_current_path} #F "
+setw -g window-status-current-format "#[bg=colour0]#[fg=colour1]#I#[fg=colour7] #{b:pane_current_path} #F "
+set -g status-left ""
+set -g status-right "#[bg=colour0]#[fg=colour7]›#[fg=colour7] #S"

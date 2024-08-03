@@ -7,7 +7,7 @@ return {
         options = { try_as_border = true },
     },
     init = function()
-        local macchiato = require("catppuccin.palettes").get_palette("macchiato")
+        -- local macchiato = require("catppuccin.palettes").get_palette("macchiato")
         vim.api.nvim_create_autocmd("FileType", {
             pattern = {
                 "help",
@@ -22,6 +22,7 @@ return {
             end,
         })
 
-        vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = macchiato.mauve })
+        -- vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = macchiato.mauve })
+        vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#FF0088" })
     end,
 }
