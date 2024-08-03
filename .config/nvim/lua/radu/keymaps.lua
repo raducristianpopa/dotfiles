@@ -36,5 +36,6 @@ nnoremap("#", "#zz")
 vnoremap("<space>", "<nop>", { desc = "Disabled - leader key (visual mode)" })
 vnoremap("J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted lines down" })
 vnoremap("K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted lines up" })
+vnoremap("<leader>f", function() require("conform").format({ async = true, lsp_fallback = true }) end, { desc = "Format range" })
 
 xnoremap("<leader>p", "\"_dP", { desc = "Do not yank the selected chars/lines after pasting" })

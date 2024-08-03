@@ -8,3 +8,8 @@ function print_colors() {
     printf "|035| \033[35mMagenta \033[m  |045| \033[45mMagenta \033[m  |095| \033[95mLight magenta \033[m  |105| \033[105mLight magenta \033[m\n"
     printf "|036| \033[36mCyan \033[m     |046| \033[46mCyan \033[m     |096| \033[96mLight cyan \033[m     |106| \033[106mLight cyan \033[m\n"
 }
+
+# Converts a JS parseable date to human friendly form
+function humanDate() {
+    node -p "const input = /\\D/g.test('$1') ? '$1' : parseInt('$1'); new Date(input).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' })"
+}

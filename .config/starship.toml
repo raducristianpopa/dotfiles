@@ -2,7 +2,6 @@
 
 format = """
 $jobs\
-$username\
 $hostname\
 $directory\
 $git_branch\
