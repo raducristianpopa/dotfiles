@@ -61,11 +61,11 @@ return {
                 map_lsp_keybinds(buffer_number)
 
                 -- Create a command `:Format` local to the LSP buffer
-                vim.api.nvim_buf_create_user_command(buffer_number, "Format", function(_)
+                vim.api.nvim_buf_create_user_command(buffer_number, "Fmt", function(_)
                     require("conform").format({})
                 end, { desc = "LSP: Format current buffer with LSP" })
 
-                vim.api.nvim_buf_create_user_command(buffer_number, "FormatGitHunks", function(_)
+                vim.api.nvim_buf_create_user_command(buffer_number, "FmtG", function(_)
                     local ignore_filetypes = { "lua" }
                     if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
                         print("range formatting for " .. vim.bo.filetype .. " not working properly.")

@@ -14,6 +14,7 @@ alias s="source ~/.zshrc"
 
 # Git
 alias ga="git add"
+alias gs="git status"
 alias gb="git branch"
 alias gc="git commit -S"
 alias gch="git checkout"
@@ -21,8 +22,3 @@ alias gd="git diff"
 alias gl="git log"
 alias gp="git push origin"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-function mkcd {
-    mkdir -- "$1" &&
-    cd -- "$1"
-}
