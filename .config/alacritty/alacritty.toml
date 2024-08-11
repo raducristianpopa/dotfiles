@@ -17,7 +17,7 @@ multiplier = 3
 
 [font]
 size = 18 
-normal = { family = "DankMono Nerd Font Mono", style = "Regular" }
+normal = { family = "IosevkaTerm Nerd Font Mono", style = "Regular" }
 italic = { style = "Italic" }
 bold = { style = "Bold" }
 
