@@ -52,56 +52,11 @@ return {
                 includeInlayVariableTypeHintsWhenTypeMatchesName = true,
             }
 
-            local format = require("conform").format
-
             -- Function to run when neovim connects to a Lsp client
             ---@diagnostic disable-next-line: unused-local
             local on_attach = function(_client, buffer_number)
                 -- Pass the current buffer to map lsp keybinds
                 map_lsp_keybinds(buffer_number)
-
-                -- Create a command `:Format` local to the LSP buffer
-                vim.api.nvim_buf_create_user_command(buffer_number, "Fmt", function(_)
-                    require("conform").format({})
-                end, { desc = "LSP: Format current buffer with LSP" })
-
-                vim.api.nvim_buf_create_user_command(buffer_number, "FmtG", function(_)
-                    local ignore_filetypes = { "lua" }
-                    if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-                        print("range formatting for " .. vim.bo.filetype .. " not working properly.")
-                        return
-                    end
-
-                    local hunks = require("gitsigns").get_hunks()
-                    if hunks == nil then
-                        return
-                    end
-
-                    local function format_range()
-                        if next(hunks) == nil then
-                            return
-                        end
-                        local hunk = nil
-                        while next(hunks) ~= nil and (hunk == nil or hunk.type == "delete") do
-                            hunk = table.remove(hunks)
-                        end
-
-                        if hunk ~= nil and hunk.type ~= "delete" then
-                            local start = hunk.added.start
-                            local last = start + hunk.added.count
-                            -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
-                            local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
-                            local range = { start = { start, 0 }, ["end"] = { last - 1, last_hunk_line:len() } }
-                            format({ range = range, async = true, lsp_fallback = true }, function()
-                                vim.defer_fn(function()
-                                    format_range()
-                                end, 1)
-                            end)
-                        end
-                    end
-
-                    format_range()
-                end, { desc = "LSP: Format current buffer Git hunks with LSP" })
             end
 
             -- LSP servers and clients are able to communicate to each other what features they support.
@@ -146,6 +101,7 @@ return {
                     },
                 },
                 sqlls = {},
+                gleam = {},
                 tailwindcss = {},
                 tsserver = {
                     settings = {
@@ -215,24 +171,68 @@ return {
     },
     {
         "stevearc/conform.nvim",
-        -- event = { "BufWritePre" },
+        event = { "BufWritePre" },
         cmd = { "ConformInfo" },
         opts = {
             notify_on_error = false,
             default_format_opts = {
                 async = true,
-                lsp_format = "fallback",
             },
-            format_after_save = nil,
-            format_on_save = nil,
+            format_after_save = {},
             formatters_by_ft = {
                 javascript = { "biome", "prettierd", "prettier" },
                 typescript = { "biome", "prettierd", "prettier" },
                 typescriptreact = { "biome", "prettierd", "prettier" },
-                svelte = { "prettierd", "prettier " },
-                lua = { "stylua" },
+                svelte = { "prettierd", "prettier" },
+                gleam = { "gleam" },
+                lua = {},
             },
         },
         keys = {},
     },
 }
+
+-- This adds a custom commands: Fmt and FmtG local to the LSP buffer
+-- To be used in the `on_attach` function.
+--
+-- vim.api.nvim_buf_create_user_command(buffer_number, "Fmt", function(_)
+--     require("conform").format({})
+-- end, { desc = "LSP: Format current buffer with LSP" })
+--
+-- vim.api.nvim_buf_create_user_command(buffer_number, "FmtG", function(_)
+--     local ignore_filetypes = { "lua" }
+--     if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+--         print("range formatting for " .. vim.bo.filetype .. " not working properly.")
+--         return
+--     end
+--
+--     local hunks = require("gitsigns").get_hunks()
+--     if hunks == nil then
+--         return
+--     end
+--
+--     local function format_range()
+--         if next(hunks) == nil then
+--             return
+--         end
+--         local hunk = nil
+--         while next(hunks) ~= nil and (hunk == nil or hunk.type == "delete") do
+--             hunk = table.remove(hunks)
+--         end
+--
+--         if hunk ~= nil and hunk.type ~= "delete" then
+--             local start = hunk.added.start
+--             local last = start + hunk.added.count
+--             -- nvim_buf_get_lines uses zero-based indexing -> subtract from last
+--             local last_hunk_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1]
+--             local range = { start = { start, 0 }, ["end"] = { last - 1, last_hunk_line:len() } }
+--             format({ range = range, async = true, lsp_fallback = true }, function()
+--                 vim.defer_fn(function()
+--                     format_range()
+--                 end, 1)
+--             end)
+--         end
+--     end
+--
+--     format_range()
+-- end, { desc = "LSP: Format current buffer Git hunks with LSP" })

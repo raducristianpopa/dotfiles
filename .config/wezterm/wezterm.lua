@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = {}
 
-config.font = wezterm.font('Iosevka Term', { weight = 'Medium' })
+config.font = wezterm.font('Iosevka Term', { weight = 'Regular' })
 config.font_size = 18.0
 config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"

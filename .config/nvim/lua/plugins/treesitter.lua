@@ -20,7 +20,8 @@ return {
                 "php",
                 "lua",
                 "vim",
-                "vimdoc"
+                "vimdoc",
+                "gleam"
             },
             modules = {},
             ignore_install = {},

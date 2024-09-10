@@ -1,10 +1,11 @@
 source ~/.config/zsh/aliases.zsh
-source ~/.config/zsh/zsh-autosuggestions.zsh
+source ~/.config/zsh/zoxide.zsh
 source ~/.config/zsh/utils.zsh
+source ~/.config/zsh/zsh-autosuggestions.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
