@@ -6,8 +6,8 @@ alias ....="cd ../../.."
 alias vim="nvim"
 alias v="nvim"
 
-alias ls="exa"
-alias ll="exa -lah"
+alias ls="eza"
+alias ll="eza -lah"
 alias cat="bat"
 
 alias s="source ~/.zshrc"
