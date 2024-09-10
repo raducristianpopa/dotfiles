@@ -6,10 +6,7 @@ source ~/.config/zsh/zsh-autosuggestions.zsh
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 # bun completions
 [ -s "/Users/radu/.bun/_bun" ] && source "/Users/radu/.bun/_bun"
