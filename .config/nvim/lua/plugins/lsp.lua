@@ -76,6 +76,7 @@ return {
                 svelte = {},
                 jsonls = {},
                 prettier = {},
+                ocamllsp = {},
                 rust_analyzer = {
                     check = {
                         command = "clippy",
@@ -129,7 +130,7 @@ return {
             }
 
             local formatters = {
-                prettierd = {},
+                prettier = {},
                 stylua = {},
             }
 
@@ -196,6 +197,7 @@ return {
                 typescriptreact = { "biome", "prettierd", "prettier" },
                 svelte = { "prettierd", "prettier" },
                 gleam = { "gleam" },
+                json = { "biome", "prettierd", "prettier" },
                 lua = {},
                 go = { "gofumpt" },
             },
