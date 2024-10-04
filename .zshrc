@@ -2,6 +2,7 @@ source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/zoxide.zsh
 source ~/.config/zsh/utils.zsh
 source ~/.config/zsh/zsh-autosuggestions.zsh
+source ~/.config/zsh/completion-for-pnpm.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
