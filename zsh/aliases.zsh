@@ -21,4 +21,3 @@ alias gch="git checkout"
 alias gd="git diff"
 alias gl="git log"
 alias gp="git push origin"
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

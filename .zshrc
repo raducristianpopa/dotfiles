@@ -10,6 +10,7 @@ export EDITOR="nvim"
 export visual="nvim"
 
 source ~/.config/zsh/aliases.zsh
+source ~/.config/zsh/bindings.zsh
 source ~/.config/zsh/zoxide.zsh
 source ~/.config/zsh/utils.zsh
 source ~/.config/zsh/zsh-autosuggestions.zsh
@@ -24,3 +25,8 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s "/Users/radu/.bun/_bun" ] && source "/Users/radu/.bun/_bun" # completions
+
+# Go
+[ -n "$(go env GOBIN)" ] && export PATH="$(go env GOBIN):${PATH}"
+[ -n "$(go env GOPATH)" ] && export PATH="$(go env GOPATH)/bin:${PATH}"
+

@@ -97,9 +97,9 @@ automatically-unhide-macos-hidden-apps = false
     # '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    alt-slash = 'layout tiles horizontal'
-    alt-comma = 'layout floating tiling'
-    alt-period = 'layout accordion horizontal'
+    # alt-slash = 'layout tiling horizontal'
+    # alt-comma = 'layout floating tiling'
+    alt-period = 'layout horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-h = 'focus left'
@@ -180,6 +180,10 @@ automatically-unhide-macos-hidden-apps = false
 [[on-window-detected]]
     if.app-id = 'net.whatsapp.WhatsApp'
     run = ['layout tiling', 'move-node-to-workspace WhatsApp']
+
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.teams2'
+    run = ['layout tiling', 'move-node-to-workspace Teams']
 
 # For unknown apps set the layout to floating
 [[on-window-detected]]

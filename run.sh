@@ -33,6 +33,9 @@ echo "🍺 Installing $(colorize "HOMEBREW")..."
 echo "🛠️ Installing applications from $(colorize "BREWFILE")..."
 brew bundle
 
+echo "⏳Sourcing profile..."
+source $HOME/.zprofile
+
 echo "🥟 Installing $(colorize "BUN")..."
 curl -fsSL https://bun.sh/install | bash
 

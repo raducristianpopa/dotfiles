@@ -9,19 +9,12 @@ $git_state\
 $git_status\
 $gleam\
 $bun\
+$golang\
 $nodejs\
 $shell\
 """
 
 add_newline = false
-
-[username]
-style_user = 'red bold'
-style_root = 'black bold'
-format = '[$user]($style) '
-disabled = false
-show_always = true
-
 
 [character]
 success_symbol = '(bold white)'
@@ -29,10 +22,6 @@ error_symbol = '(bold red)'
 
 [package]
 disabled = true
-
-# [git_branch]
-# symbol = ""
-# format = '[git\([$branch](bold red)\)](bold blue) '
 
 [bun]
 symbol = '🥟 '
