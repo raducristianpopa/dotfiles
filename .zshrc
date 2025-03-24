@@ -29,4 +29,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Go
 [ -n "$(go env GOBIN)" ] && export PATH="$(go env GOBIN):${PATH}"
 [ -n "$(go env GOPATH)" ] && export PATH="$(go env GOPATH)/bin:${PATH}"
-
