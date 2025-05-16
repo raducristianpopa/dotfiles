@@ -21,7 +21,9 @@ return {
                 "lua",
                 "vim",
                 "vimdoc",
-                "gleam"
+                "gleam",
+                "hcl",
+                "helm"
             },
             modules = {},
             ignore_install = {},

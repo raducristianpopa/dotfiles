@@ -1,6 +1,14 @@
 local nnoremap = require("radu.utils").nnoremap
 local inoremap = require("radu.utils").inoremap
 
+local signature_help = function()
+    return vim.lsp.buf.signature_help({ border = "rounded" })
+end
+
+local hover = function()
+    return vim.lsp.buf.hover({ border = "rounded" })
+end
+
 local map_lsp_keybinds = function(buffer_number)
     local telescope_builtin = require("telescope.builtin");
     nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "LSP: [R]e[n]ame", buffer = buffer_number })
@@ -10,36 +18,33 @@ local map_lsp_keybinds = function(buffer_number)
     nnoremap("gi", telescope_builtin.lsp_implementations, { desc = "LSP: [G]oto [I]mplementation", buffer = buffer_number })
     nnoremap("<leader>bs", telescope_builtin.lsp_document_symbols, { desc = "LSP: [B]uffer [S]ymbols", buffer = buffer_number })
     nnoremap("<leader>ps", telescope_builtin.lsp_workspace_symbols, { desc = "LSP: [P]roject [S]ymbols", buffer = buffer_number })
-    nnoremap("K", vim.lsp.buf.hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
-    inoremap("<C-h>", vim.lsp.buf.signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
+    nnoremap("K", hover, { desc = "LSP: Hover Documentation", buffer = buffer_number })
+    inoremap("<C-h>", signature_help, { desc = "LSP: Signature Documentation", buffer = buffer_number })
     nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: [G]oto [D]eclaration", buffer = buffer_number })
     nnoremap("td", vim.lsp.buf.type_definition, { desc = "LSP: [T]ype [D]efinition", buffer = buffer_number })
 end
 
 return {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost" },
+    event = { "BufReadPost", "BufReadPre", "BufNewFile", "BufEnter" },
     cmd = { "LspInfo", "LspInstall", "LspUninstall", "Mason" },
     dependencies = {
         -- Plugin(s) and UI to automatically install LSPs to stdpath
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason.nvim",
+        "mason-org/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
 
         -- Install lsp autocompletions
         "hrsh7th/cmp-nvim-lsp",
+
+        -- Helm syntax and filetype
+        { 'towolf/vim-helm', ft = 'helm' },
 
         -- Progress/Status update for LSP
         { "j-hui/fidget.nvim", opts = {} },
 
     },
     config = function()
-        -- Default handlers for LSP
-        local default_handlers = {
-            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-        }
-
         local tsserver_inlay_hints = {
             includeInlayEnumMemberValueHints = true,
             includeInlayFunctionLikeReturnTypeHints = true,
@@ -74,7 +79,6 @@ return {
             html = {},
             svelte = {},
             jsonls = {},
-            prettier = {},
             ocamllsp = {},
             rust_analyzer = {
                 check = {
@@ -118,6 +122,8 @@ return {
             gopls = {
                 settings = {
                     gopls = {
+                        completeUnimported = true,
+                        usePlaceholders = true,
                         analyses = {
                             unusedparams = true,
                         },
@@ -126,6 +132,15 @@ return {
                     },
                 },
             },
+            helm_ls = {
+                settings = {
+                    ['helm-ls'] = {
+                        yamlls = {
+                            path = "yaml-language-server",
+                        }
+                    }
+                }
+            }
         }
 
         local formatters = {
@@ -154,7 +169,7 @@ return {
                 cmd = config.cmd,
                 capabilities = capabilities,
                 filetypes = config.filetypes,
-                handlers = vim.tbl_deep_extend("force", {}, default_handlers, config.handlers or {}),
+                handlers = vim.tbl_deep_extend("force", {}, config.handlers or {}),
                 on_attach = on_attach,
                 settings = config.settings,
                 root_dir = config.root_dir,
@@ -162,21 +177,13 @@ return {
         end
 
         -- Setup mason so it can manage 3rd party LSP servers
-        require("mason").setup({
-            ui = {
-                border = "rounded",
-            },
-        })
+        require("mason").setup({ ui = { border = "rounded" } })
         require("mason-lspconfig").setup()
 
         -- Configure borderd for LspInfo ui
         require("lspconfig.ui.windows").default_options.border = "rounded"
 
-        -- Configure diagnostics border
-        vim.diagnostic.config({
-            float = {
-                border = "rounded",
-            },
-        })
+        -- Enable virtual lines for diagnostics
+        vim.diagnostic.config({ float = { border = "rounded" } })
     end,
 }
