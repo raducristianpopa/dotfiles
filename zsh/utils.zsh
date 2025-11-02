@@ -13,8 +13,3 @@ function print_colors() {
 function humanDate() {
     node -p "const input = /\\D/g.test('$1') ? '$1' : parseInt('$1'); new Date(input).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' })"
 }
-
-function mkcd {
-    mkdir -- "$1" &&
-    cd -- "$1"
-}

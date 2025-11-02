@@ -15,11 +15,17 @@ source ~/.config/zsh/zoxide.zsh
 source ~/.config/zsh/utils.zsh
 source ~/.config/zsh/zsh-autosuggestions.zsh
 source ~/.config/zsh/completion-for-pnpm.zsh
+source ~/.config/zsh/completion-for-k9s.zsh
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fnm env --use-on-cd --shell zsh)"
+eval "$(direnv hook zsh)"
+
+# Zed
+export PATH=$HOME/.local/bin:$PATH
+
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
@@ -29,3 +35,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Go
 [ -n "$(go env GOBIN)" ] && export PATH="$(go env GOBIN):${PATH}"
 [ -n "$(go env GOPATH)" ] && export PATH="$(go env GOPATH)/bin:${PATH}"
+
+# Terraform
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform

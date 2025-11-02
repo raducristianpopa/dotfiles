@@ -41,7 +41,6 @@ curl -fsSL https://bun.sh/install | bash
 
 create_symlink ".zshrc" "$HOME"
 create_symlink "zsh"
-create_symlink "wezterm"
 create_symlink "ghostty"
 create_symlink "nvim"
 create_symlink "tmux"
@@ -50,5 +49,6 @@ create_symlink "starship"
 create_symlink "lazygit"
 create_symlink "btop"
 create_symlink "aerospace"
+create_symlink "k9s"
 
 source "$HOME/.zshrc"

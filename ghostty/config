@@ -28,6 +28,7 @@ cursor-style = block
 window-padding-y = 10,0
 window-padding-x = 10 
 window-colorspace = display-p3
+macos-option-as-alt = true
 macos-titlebar-style = hidden
 
 shell-integration = zsh

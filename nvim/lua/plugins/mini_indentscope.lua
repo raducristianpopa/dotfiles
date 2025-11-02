@@ -20,8 +20,5 @@ return {
                 vim.b.miniindentscope_disable = true
             end,
         })
-
-        -- vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = macchiato.mauve })
-        vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#FF0088" })
     end,
 }

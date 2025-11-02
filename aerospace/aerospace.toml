@@ -185,10 +185,6 @@ automatically-unhide-macos-hidden-apps = false
     if.app-id = 'com.microsoft.teams2'
     run = ['layout tiling', 'move-node-to-workspace Teams']
 
-[[on-window-detected]]
-    if.app-id = 'com.linear'
-    run = ['layout tiling', 'move-node-to-workspace Linear']
-
 # For unknown apps set the layout to floating
 [[on-window-detected]]
-    run = ['layout floating', 'move-node-to-workspace 1']
+    run = ['layout tiling', 'move-node-to-workspace 1']

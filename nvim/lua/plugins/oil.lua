@@ -14,6 +14,12 @@ return {
         config = function()
             require("oil").setup({
                 use_default_keymaps = false,
+                confirmation = {
+                    border = "rounded",
+                },
+                float = {
+                    border = "rounded",
+                },
                 keymaps = {
                     ["g?"] = "actions.show_help",
                     ["<CR>"] = "actions.select",
@@ -46,10 +52,10 @@ return {
             "stevearc/oil.nvim",
         },
         config = function ()
-           local oil_git_status = require("oil-git-status");
-           oil_git_status.setup({
-               show_ignored = false
-           })
+            local oil_git_status = require("oil-git-status");
+            oil_git_status.setup({
+                show_ignored = false
+            })
         end
     },
 }

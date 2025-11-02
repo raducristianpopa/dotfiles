@@ -126,6 +126,7 @@ return {
                         usePlaceholders = true,
                         analyses = {
                             unusedparams = true,
+                            ST1000 = false,
                         },
                         staticcheck = true,
                         gofumpt = true,
@@ -164,7 +165,7 @@ return {
 
         -- Iterate over the servers and set them up
         for name, config in pairs(servers) do
-            require("lspconfig")[name].setup({
+            vim.lsp.config(name, {
                 autostart = config.autostart,
                 cmd = config.cmd,
                 capabilities = capabilities,
@@ -178,7 +179,7 @@ return {
 
         -- Setup mason so it can manage 3rd party LSP servers
         require("mason").setup({ ui = { border = "rounded" } })
-        require("mason-lspconfig").setup()
+        -- require("mason-lspconfig").setup()
 
         -- Configure borderd for LspInfo ui
         require("lspconfig.ui.windows").default_options.border = "rounded"
