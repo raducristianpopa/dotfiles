@@ -1,6 +1,7 @@
 local nnoremap = require("radu.utils").nnoremap
 local vnoremap = require("radu.utils").vnoremap
 local xnoremap = require("radu.utils").xnoremap
+local inoremap = require("radu.utils").inoremap
 
 ---[[ NORMAL ]]---
 nnoremap("<space>", "<nop>", { desc = "Disabled - leader key (normal mode)" })
@@ -37,9 +38,13 @@ nnoremap("%", "%zz")
 nnoremap("*", "*zz")
 nnoremap("#", "#zz")
 
----[[ VISUAL & SELECT ]]---
+inoremap("jj", "<esc>", { desc = "Exit insert mode (jj)" })
+inoremap("JJ", "<esc>", { desc = "Exit insert mode (JJ)" })
+
 vnoremap("<space>", "<nop>", { desc = "Disabled - leader key (visual mode)" })
 vnoremap("J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted lines down" })
 vnoremap("K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted lines up" })
 
 xnoremap("<leader>p", "\"_dP", { desc = "Do not yank the selected chars/lines after pasting" })
+xnoremap("<<", function () vim.cmd("normal! <<") vim.cmd("normal! gv")  end, { desc = "Indent left and reselect visual block" })
+xnoremap(">>", function () vim.cmd("normal! >>") vim.cmd("normal! gv")  end, { desc = "Indent right and reselect visual block" })

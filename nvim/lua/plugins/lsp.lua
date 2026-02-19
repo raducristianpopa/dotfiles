@@ -56,13 +56,6 @@ return {
             includeInlayVariableTypeHintsWhenTypeMatchesName = true,
         }
 
-        -- Function to run when neovim connects to a Lsp client
-        ---@diagnostic disable-next-line: unused-local
-        local on_attach = function(_client, buffer_number)
-            -- Pass the current buffer to map lsp keybinds
-            map_lsp_keybinds(buffer_number)
-        end
-
         -- LSP servers and clients are able to communicate to each other what features they support.
         --  By default, Neovim doesn't support everything that is in the LSP Specification.
         --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
@@ -163,26 +156,33 @@ return {
             ensure_installed = ensure_installed,
         })
 
+        vim.api.nvim_create_autocmd("LspAttach", {
+            group = vim.api.nvim_create_augroup("LspAttach", { clear = true }),
+            callback = function (event)
+                map_lsp_keybinds(event.buf)
+            end
+        })
+
         -- Iterate over the servers and set them up
         for name, config in pairs(servers) do
             vim.lsp.config(name, {
-                autostart = config.autostart,
                 cmd = config.cmd,
                 capabilities = capabilities,
                 filetypes = config.filetypes,
-                handlers = vim.tbl_deep_extend("force", {}, config.handlers or {}),
-                on_attach = on_attach,
                 settings = config.settings,
                 root_dir = config.root_dir,
             })
+
+            if config.autostart == false then
+                -- Don't auto-enable servers with autostart = false
+                -- Users can manually enable with :lua vim.lsp.enable(name)
+            else
+                vim.lsp.enable(name)
+            end
         end
 
         -- Setup mason so it can manage 3rd party LSP servers
         require("mason").setup({ ui = { border = "rounded" } })
-        -- require("mason-lspconfig").setup()
-
-        -- Configure borderd for LspInfo ui
-        require("lspconfig.ui.windows").default_options.border = "rounded"
 
         -- Enable virtual lines for diagnostics
         vim.diagnostic.config({ float = { border = "rounded" } })

@@ -25,11 +25,22 @@ font-family = Iosevka Term
 
 cursor-style = block
 
-window-padding-y = 10,0
+unfocused-split-opacity = 0.30
+split-divider-color = #333333
+
+window-padding-y = 0
 window-padding-x = 10 
 window-colorspace = display-p3
+
+macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
-macos-titlebar-style = hidden
+macos-titlebar-style = tabs
+macos-window-buttons = hidden
 
 shell-integration = zsh
 shell-integration-features = no-cursor
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:down
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+l=goto_split:right
