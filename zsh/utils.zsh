@@ -10,6 +10,6 @@ function print_colors() {
 }
 
 # Converts a JS parseable date to human friendly form
-function humanDate() {
+function human_date() {
     node -p "const input = /\\D/g.test('$1') ? '$1' : parseInt('$1'); new Date(input).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'medium' })"
 }

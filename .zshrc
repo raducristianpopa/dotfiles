@@ -42,3 +42,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Terraform
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# Open buffer line in editor
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line

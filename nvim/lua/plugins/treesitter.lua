@@ -21,7 +21,6 @@ return {
                 "lua",
                 "vim",
                 "vimdoc",
-                "gleam",
                 "hcl",
                 "helm"
             },

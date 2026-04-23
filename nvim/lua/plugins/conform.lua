@@ -27,7 +27,6 @@ return {
             typescriptreact = { "prettierd", "prettier" },
             svelte = { "prettierd", "prettier" },
             astro = { "prettierd", "prettier" },
-            gleam = { "gleam" },
             json = { "prettierd", "prettier" },
             lua = {},
             go = { "gofmt" },

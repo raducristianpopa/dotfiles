@@ -1,9 +1,4 @@
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "oil",
-    callback = function()
-        vim.opt_local.colorcolumn = ""
-    end,
-})
+local map_oil_keybinds = require("radu.keymaps").map_oil_keybinds
 
 return {
     {
@@ -12,7 +7,9 @@ return {
         -- Optional dependencies
         dependencies = { "echasnovski/mini.icons", opts = {} },
         config = function()
-            require("oil").setup({
+            local oil = require("oil")
+
+            oil.setup({
                 use_default_keymaps = false,
                 confirmation = {
                     border = "rounded",
@@ -44,6 +41,8 @@ return {
                     signcolumn = "auto:2",
                 },
             })
+
+            map_oil_keybinds(oil)
         end,
     },
     {

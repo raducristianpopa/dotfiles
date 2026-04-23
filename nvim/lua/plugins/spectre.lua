@@ -1,12 +1,16 @@
+local map_spectre_keybinds = require("radu.keymaps").map_spectre_keybinds
+
 return {
     "nvim-pack/nvim-spectre",
-    lazy = true,
+    lazy = false,
     cmd = { "Spectre" },
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
     config = function()
-        require("spectre").setup({
+        local spectre = require("spectre")
+
+        spectre.setup({
             highlight = {
                 search = "SpectreSearch",
                 replace = "SpectreReplace",
@@ -24,5 +28,7 @@ return {
                 },
             },
         })
+
+        map_spectre_keybinds(spectre)
     end,
 }

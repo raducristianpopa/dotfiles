@@ -1,4 +1,5 @@
 local opt = vim.opt
+local diagnostics = vim.diagnostic
 
 vim.g.mapleader = " "
 vim.g.netrw_browse_split = 0
@@ -19,6 +20,7 @@ opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
 opt.smartindent = true
+opt.breakindent = true
 opt.wrap = false
 opt.hlsearch = false
 opt.incsearch = true
@@ -33,3 +35,7 @@ opt.list = true
 opt.listchars = { tab = '» ', eol = '↵' }
 opt.undofile = true
 opt.smoothscroll = true
+
+diagnostics.config({
+    virtual_text = true,
+})

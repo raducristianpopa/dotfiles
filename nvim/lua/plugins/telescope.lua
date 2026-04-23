@@ -43,8 +43,6 @@ return {
         nnoremap("<leader>sf", builtin.find_files, { desc = "[S]earch [f]iles" })
         nnoremap("<leader>sg", builtin.git_files, { desc = "[S]earch [G]it files" })
         nnoremap("<leader>sr", builtin.live_grep, { desc = "[S]earch by [R]ipgrep" })
-        nnoremap("<leader>sw", function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
-            { desc = "[S]earch current [w]ord" })
         nnoremap("<leader>/", function()
             builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
                 winblend = 10,

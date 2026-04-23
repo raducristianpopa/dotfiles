@@ -1,92 +1,139 @@
 return {
-    "hrsh7th/nvim-cmp",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        {
+    {
+        "saghen/blink.cmp",
+        event = "VeryLazy",
+        dependencies = {
+            "hrsh7th/nvim-cmp" ,
+            "rafamadriz/friendly-snippets",
             "L3MON4D3/LuaSnip",
-            version = "v2.3",
         },
-        "saadparwaiz1/cmp_luasnip",
-        "rafamadriz/friendly-snippets",
-        "onsails/lspkind.nvim",
-        "windwp/nvim-ts-autotag",
-    },
-    config = function()
-        local cmp = require("cmp")
-        local luasnip = require("luasnip")
-        local lspkind = require("lspkind")
-
-        -- Load snippets
-        require("luasnip.loaders.from_vscode").lazy_load()
-
-        cmp.setup({
-            snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
+        version = "v1.*",
+        opts = {
+            keymap = {
+                ["<C-k>"] = { "select_prev", "show_signature", "hide_signature", "fallback" },
+                ["<C-j>"] = { "select_next", "fallback" },
+                ["<C-c>"] = { "cancel", "fallback" },
+                ["<CR>"] = { "select_and_accept", "fallback" },
+                ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+                ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+                ["<C-Space>"] = { "show", "fallback" },
+                -- Tab behavior: navigate forward through suggestions or snippet placeholders
+                ["<Tab>"] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.snippet_forward()
+                        else
+                            return cmp.select_next()
+                        end
+                    end,
+                    "fallback",
+                },
+                ["<S-Tab>"] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.snippet_backward()
+                        else
+                            return cmp.select_prev()
+                        end
+                    end,
+                    "fallback",
+                },
             },
-            window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
+            appearance = {
+                use_nvim_cmp_as_default = true,
             },
-            completion = { completeopt = "menu,menuone,noinsert" },
-            mapping = cmp.mapping.preset.insert({
-                ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-                ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
-                ["<Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-                ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-                ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- scroll up preview
-                ["<C-d>"] = cmp.mapping.scroll_docs(4), -- scroll down preview
-                ["<C-Space>"] = cmp.mapping.complete({}), -- show completion suggestions
-                ["<C-c>"] = cmp.mapping.abort(), -- close completion window
-                ["<CR>"] = cmp.mapping.confirm({ select = true }), -- select suggestion
-            }),
-            -- sources for autocompletion
-            sources = cmp.config.sources({
-                { name = "nvim_lsp", group_index = 1 }, -- lsp
-                { name = "buffer", max_item_count = 5, group_index = 2 }, -- text within current buffer
-                { name = "path", max_item_count = 3, group_index = 3 }, -- file system paths
-                { name = "luasnip", max_item_count = 3, group_index = 5 }, -- snippets
-                { name = "nvim-lsp-signature-help" },
-            }),
-            -- Enable pictogram icons for lsp/autocompletion
-            formatting = {
-                expandable_indicator = true,
-                format = lspkind.cmp_format({
-                    mode = "symbol_text",
-                    maxwidth = 50,
-                    ellipsis_char = "...",
-                    menu = {
-                        nvim_lsp = "[LSP]",
-                        buffer = "[Buffer]",
-                        path = "[PATH]",
-                        luasnip = "[LuaSnip]",
+            sources = {
+                default = { "lazydev", "lsp", "path", "snippets" },
+                providers = {
+                    lsp = {
+                        score_offset = 1000, -- Extreme priority to override fuzzy matching
                     },
-                }),
+                    path = {
+                        score_offset = 3, -- File paths moderate priority
+                    },
+                    snippets = {
+                        score_offset = -100, -- Much lower priority
+                        max_items = 2, -- Limit snippet suggestions
+                        min_keyword_length = 3, -- Don't show for single chars
+                    },
+                    buffer = {
+                        score_offset = -150, -- Lowest priority
+                        min_keyword_length = 3, -- Only show after 3 chars
+                    },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
+                },
             },
-            experimental = {
-                ghost_text = false,
+            snippets = {
+                preset = "luasnip",
             },
-        })
-    end,
+            signature = {
+                enabled = true,
+                trigger = {
+                    show_on_trigger_character = false,
+                    show_on_insert_on_trigger_character = false,
+                },
+                window = {
+                    border = "rounded",
+                    show_documentation = true,
+                },
+            },
+            completion = {
+                trigger = {
+                    show_in_snippet = false,
+                    show_on_trigger_character = true,
+                },
+                menu = {
+                    border = "rounded",
+                    max_height = 25,
+                    draw = {
+                        columns = {
+                            { "kind_icon" },
+                            { "label", "label_description", gap = 1 },
+                            { "source_name" },
+                        },
+                        components = {
+                            -- Native icon support (no lspkind needed)
+                            source_name = {
+                                text = function(ctx)
+                                    local source_names = {
+                                        lsp = "[LSP]",
+                                        buffer = "[Buffer]",
+                                        path = "[Path]",
+                                        snippets = "[Snippet]",
+                                    }
+                                    return (source_names[ctx.source_name] or "[") .. ctx.source_name .. "]"
+                                end,
+                                highlight = "CmpItemMenu",
+                            },
+                        },
+                    },
+                    auto_show = true,
+                },
+                documentation = {
+                    auto_show = true,
+                    window = {
+                        border = "rounded",
+                    },
+                },
+                ghost_text = {
+                    enabled = false,
+                },
+                list = {
+                    selection = {
+                        preselect = true,
+                    },
+                },
+                accept = {
+                    auto_brackets = {
+                        enabled = true,
+                    },
+                },
+            },
+        },
+    },
 }
